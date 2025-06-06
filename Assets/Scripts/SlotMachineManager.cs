@@ -52,7 +52,6 @@ public class SlotMachineManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 5; j++) {
-                Debug.Log($"{j}{i} => {ReelList[j].symbols[i].currentPos} <==> {j + 1}{i} => {ReelList[j + 1].symbols[i].currentPos}");
                 if (j < 4 &&
                     ReelList[j].symbols[i].currentPos == ReelList[j + 1].symbols[i].currentPos &&
                     ReelList[j].symbols[i].slotItem == ReelList[j + 1].symbols[i].slotItem 
@@ -60,7 +59,6 @@ public class SlotMachineManager : MonoBehaviour
                 {
                     ReelList[j].symbols[i].MatchedEffect(true);
                     ReelList[j + 1].symbols[i].MatchedEffect(true);
-                    //Debug.Log($"{j} : {i} <==> {j+1} : {i}");
                 }
             }
         }

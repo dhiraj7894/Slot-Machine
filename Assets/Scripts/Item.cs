@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     public void ShowSpecialNumber()
     {
         currentPos = (int)transform.localPosition.y;
-        if (slotItem.ID == 5)
+        if (slotItem.ID == 10)
         {
             icon.gameObject.SetActive(false);
             specialNumber.gameObject.SetActive(true);

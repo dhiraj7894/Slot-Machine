@@ -6,23 +6,23 @@ using UnityEngine.UI;
 
 public class ReelManager : MonoBehaviour
 {
-    [HideInInspector] public int reelIndex; // Index of the reel
-    public SlotMachineManager slotMachineManager; // Reference to the SlotMachineManager
-    public List<SlotItem> slotItemsData = new List<SlotItem>(); // List to hold the slot item data
-    public List<Item> slotItems = new List<Item>(); // Array to hold the reel GameObjects
+    [HideInInspector] public int reelIndex; 
+    public SlotMachineManager slotMachineManager; 
+    public List<SlotItem> slotItemsData = new List<SlotItem>(); 
+    public List<Item> slotItems = new List<Item>(); 
     [SerializeField] private float[] itemArrayPosition;   
 
-    public bool isSpinning = false; // Flag to check if the reel is currently spinning
+    public bool isSpinning = false; 
     public bool isStopped = true;
-    public float spinSpeed = 5f; // Speed of the spinning
+    public float spinSpeed = 5f; 
 
-    [HideInInspector]public float spinDuration = 2f; // Duration for which the reel spins
+    [HideInInspector]public float spinDuration = 2f; 
     private void Start()
     {
         PopulateSlotItem();
     }
 
-    private float currentSpeed = 0f; // Current speed of the reel
+    private float currentSpeed = 0f; 
 
     public void Update()
     {
@@ -72,7 +72,8 @@ public class ReelManager : MonoBehaviour
                 if(!slotMachineManager.ReelList[reelIndex].symbols.Contains(item)) slotMachineManager.ReelList[reelIndex].symbols.Add(item); // Add the reel to the ReelList
             }
         }
-        if(reelIndex == slotMachineManager.Reels.Count - 1 )
+        slotMachineManager.ReelList[reelIndex].symbols.Sort((a, b) => a.currentPos.CompareTo(b.currentPos));
+        if (reelIndex == slotMachineManager.Reels.Count - 1 )
         {
             Debug.Log($"{this.name} => All symbols Stopped");
             LeanTween.delayedCall(.1f, () => slotMachineManager.MatchRows());
@@ -84,7 +85,7 @@ public class ReelManager : MonoBehaviour
     {
         foreach (Item item in slotItems)
         {
-            item.slotItem = slotItemsData[Random.Range(0, slotItemsData.Count - 1)]; // Assign a random item from the slotItemsData list
+            item.slotItem = slotItemsData[Random.Range(0, slotItemsData.Count)]; // Assign a random item from the slotItemsData list
             item.ShowSpecialNumber(); // Show the special number if applicable
             GetNextPos(item.currentPos, item);
         }
