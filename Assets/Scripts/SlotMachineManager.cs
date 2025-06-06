@@ -45,6 +45,7 @@ public class SlotMachineManager : MonoBehaviour
         {
             item.symbols.Clear();
         }
+        LeanTween.delayedCall(0.7f,()=> AudioManager.Instance.PlayAudio("loop"));
     }
 
     public void MatchRows()

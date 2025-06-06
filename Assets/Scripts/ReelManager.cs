@@ -50,7 +50,7 @@ public class ReelManager : MonoBehaviour
                     }
 
                     slotMachineManager.reelsStopped[reelIndex] = true;
-                    isStopped = true;
+                    isStopped = true;                    
                     StoppingProcess();
                     return;
                 }
@@ -73,6 +73,8 @@ public class ReelManager : MonoBehaviour
             }
         }
         slotMachineManager.ReelList[reelIndex].symbols.Sort((a, b) => a.currentPos.CompareTo(b.currentPos));
+        if(reelIndex != 4) AudioManager.Instance.PlayAudio("stop");
+        
         if (reelIndex == slotMachineManager.Reels.Count - 1 )
         {
             Debug.Log($"{this.name} => All symbols Stopped");
