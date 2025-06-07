@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public AudioSource AudioSource;
+    public AudioSource AudioSourceB;
     public AudioClip ReelSpinning;
     public AudioClip ReelStopped;
 
@@ -23,8 +24,8 @@ public class AudioManager : MonoBehaviour
         {            
             AudioSource.loop = false;
             AudioSource.Stop();
-            AudioSource.clip = ReelStopped;
-            AudioSource.Play();
+            AudioSourceB.clip = ReelStopped;
+            AudioSourceB.Play();
         }
     }
 
