@@ -8,10 +8,11 @@ public class ReelManager : MonoBehaviour
 {
     [HideInInspector] public int reelIndex; 
     public SlotMachineManager slotMachineManager; 
-    public List<SlotItem> slotItemsData = new List<SlotItem>(); 
-    public List<Item> slotItems = new List<Item>(); 
-    [SerializeField] private float[] itemArrayPosition;   
-
+    public List<SlotSymbols> slotItemsData = new List<SlotSymbols>(); 
+    public List<Symbols> slotItems = new List<Symbols>(); 
+    [SerializeField] private float[] itemArrayPosition;
+    
+    [Header("Spin Control"),Space(5)]
     public bool isSpinning = false; 
     public bool isStopped = true;
     public float spinSpeed = 5f; 
@@ -36,11 +37,13 @@ public class ReelManager : MonoBehaviour
             if (slotItems[i].transform.localPosition.y != slotItems[i].nextPos)
             {
                 // Move the item towards the next position based on the current speed
-                float step = (currentSpeed * 1000) * Time.deltaTime; // Calculate the step size based on the current speed
-                slotItems[i].transform.localPosition = Vector3.MoveTowards(slotItems[i].transform.localPosition, new Vector3(slotItems[i].transform.localPosition.x, slotItems[i].nextPos, slotItems[i].transform.localPosition.z), step);
+                float step = (currentSpeed * 1000) * Time.deltaTime; 
+                Vector3 targetPos = new Vector3(slotItems[i].transform.localPosition.x, slotItems[i].nextPos, slotItems[i].transform.localPosition.z);
+                slotItems[i].transform.localPosition = Vector3.MoveTowards(slotItems[i].transform.localPosition, targetPos, step);
             }
             else
             {
+
                 if (!isSpinning && !isStopped)
                 {
                     currentSpeed = 0;
@@ -49,12 +52,12 @@ public class ReelManager : MonoBehaviour
                         slotItems[j].PlayAnim("Bounce");
                     }
 
-                    slotMachineManager.reelsStopped[reelIndex] = true;
-                    isStopped = true;                    
+                    isStopped = true; 
+
                     StoppingProcess();
                     return;
                 }
-
+                // If the item has reached its next position, update its current position and get the next position
                 slotItems[i].currentPos = (int)slotItems[i].transform.localPosition.y;
                 GetNextPos(slotItems[i].currentPos, slotItems[i]);
             }
@@ -65,19 +68,26 @@ public class ReelManager : MonoBehaviour
 
     public void StoppingProcess()
     {
-        foreach (Item item in slotItems)
+        foreach (Symbols item in slotItems)
         {
             if (item.nextPos == 140 || item.nextPos == 405 || item.nextPos == 670)
             {
-                if(!slotMachineManager.ReelList[reelIndex].symbols.Contains(item)) slotMachineManager.ReelList[reelIndex].symbols.Add(item); // Add the reel to the ReelList
+  
+                if (!slotMachineManager.ReelList[reelIndex].symbols.Contains(item)) slotMachineManager.ReelList[reelIndex].symbols.Add(item); 
             }
         }
+
+        // Sort the symbols in the ReelList based on their current position
         slotMachineManager.ReelList[reelIndex].symbols.Sort((a, b) => a.currentPos.CompareTo(b.currentPos));
-        if(reelIndex != 4) AudioManager.Instance.PlayAudio("stop");
-        
+
+
+    
+        if (reelIndex != 4) AudioManager.Instance.PlayAudio("stop");
+
+        // Check if all reels have stopped spinning
         if (reelIndex == slotMachineManager.Reels.Count - 1 )
         {
-            Debug.Log($"{this.name} => All symbols Stopped");
+            Debug.Log("Slot Machine Spin Stopped");
             LeanTween.delayedCall(.1f, () => slotMachineManager.MatchRows());
             return;
         }
@@ -85,10 +95,11 @@ public class ReelManager : MonoBehaviour
 
     public void PopulateSlotItem()
     {
-        foreach (Item item in slotItems)
+        
+        foreach (Symbols item in slotItems)
         {
-            item.slotItem = slotItemsData[Random.Range(0, slotItemsData.Count)]; // Assign a random item from the slotItemsData list
-            item.ShowSpecialNumber(); // Show the special number if applicable
+            item.slotSymbol = slotItemsData[Random.Range(0, slotItemsData.Count)]; 
+            item.ShowSpecialNumber(); 
             GetNextPos(item.currentPos, item);
         }
     }
@@ -98,40 +109,46 @@ public class ReelManager : MonoBehaviour
 
     public void Spin()
     {
-        if (isSpinning) return;        
+        if (isSpinning) return;
+
         LeanTween.value(gameObject, 0, -spinSpeed / 8, 0.01f)
-            .setEaseInSine()
+            .setEaseInSine() 
             .setOnUpdate((float value) => currentSpeed = value)
             .setOnComplete(() =>
             {
+                // After the initial bounce, start spinning in the forward direction
                 LeanTween.value(gameObject, currentSpeed, spinSpeed, 1f)
                     .setEaseInCubic()
                     .setOnUpdate((float value) => currentSpeed = value);
             });
+
+        // Now refresh the symbols with new random items
         LeanTween.delayedCall(gameObject, spinDuration / 2, () =>
         {
-            foreach (Item item in slotItems)
+            foreach (Symbols item in slotItems)
             {
-                item.slotItem = slotItemsData[Random.Range(0, slotItemsData.Count - 1)]; // Assign a random item from the slotItemsData list
-                item.ShowSpecialNumber(); // Show the special number if applicable                
+                item.slotSymbol = slotItemsData[Random.Range(0, slotItemsData.Count - 1)]; 
+                item.ShowSpecialNumber();             
             }
         });
-        //Debug.Log("Spin Duration: " + spinDuration);
+
+        // After the spin duration, stop the spinning
         LeanTween.delayedCall(gameObject, spinDuration, () =>
         {
             isSpinning = false;
         });
     }
 
+
     public void ResetSymbolColors()
     {
-        foreach (Item item in slotItems)
+        foreach (Symbols item in slotItems)
         {
             item.MatchedEffect(false);
         }
     }
 
-    public void GetNextPos(int currentPos, Item sItem)
+    public void GetNextPos(int currentPos, Symbols sItem)
     {
         foreach (int item in itemArrayPosition)
         {

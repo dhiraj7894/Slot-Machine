@@ -3,42 +3,44 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class Symbols : MonoBehaviour
 {
-    public SlotItem slotItem; // The item that this GameObject represents
+    public SlotSymbols slotSymbol; 
     public Image icon;
     public GameObject effectUI;
     public TextMeshProUGUI specialNumber;
+    public Animator anim;
 
     [Space(10)]
     public int currentPos;
     public int nextPos;
-    public Animator anim;
-    private void Start()
-    {
-        ShowSpecialNumber();
-    }
+
+    // Based on the slot symbol ScriptableObject, check if the symbol is a special symbol if yes then show the special number else hide it
     public void ShowSpecialNumber()
     {
         currentPos = (int)transform.localPosition.y;
-        if (slotItem.ID == 10)
+        if (slotSymbol.ID == 10)
         {
-            icon.gameObject.SetActive(false);
+            icon.sprite = slotSymbol.icon;
             specialNumber.gameObject.SetActive(true);
             specialNumber.text = Random.Range(150, 301).ToString();
+            icon.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
         }
         else
         {
-            icon.gameObject.SetActive(true);
             specialNumber.gameObject.SetActive(false);
-            icon.sprite = slotItem.icon;
+            icon.sprite = slotSymbol.icon;
+            icon.transform.localScale = Vector3.one;
         }
     }
+
 
     public void MatchedEffect(bool isTrue)
     {
         effectUI.SetActive(isTrue);
     }
+
+
     public void PlayAnim(string animString)
     {        
         if (nextPos == 140 || nextPos == 405 || nextPos == 670)

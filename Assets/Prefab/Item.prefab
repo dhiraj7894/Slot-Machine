@@ -164,10 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6159681041219018419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8cbd973ff1cc694cb0192d91d380729, type: 3}
+  m_Script: {fileID: 11500000, guid: a69dbf16470795b46b655d2b95ec00d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotItem: {fileID: 11400000, guid: b9e5668f303360f4fb9afd7ad48125b2, type: 2}
+  slotItem: {fileID: 0}
   icon: {fileID: 7395555568158764257}
   effectUI: {fileID: 7923371742977698659}
   specialNumber: {fileID: 5358272813205847554}
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -288,8 +288,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 109.7
-  m_fontSizeBase: 109.7
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -359,7 +359,7 @@ RectTransform:
   m_GameObject: {fileID: 7923371742977698659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.33, y: 1.33, z: 1.33}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 43811873644313906}

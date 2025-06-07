@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3124c389463b6e14e8b1d64589f04bb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 69e5456389a5b49429bbb57601e318a3, type: 3}
   m_Name: Cookie
   m_EditorClassIdentifier: 
   ID: 4
