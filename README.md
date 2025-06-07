@@ -41,7 +41,10 @@ https://assetstore.unity.com/packages/2d/gui/icons/cute-gui-pack-lite-202389
 2. Sweets Icon Pack : For Symbol pack
 https://assetstore.unity.com/packages/2d/gui/icons/sweets-icon-pack-191548
 
-![Image 1](/Recordings/Image%20Sequence_003_0000.png)
-![Image 2](/Recordings/Image%20Sequence_002_0000.png)
-![Image 3](/Recordings/Image%20Sequence_005_0000.png)
-![Giff](/Recordings/Movie_000.gif)
+<img src="Recordings/Image%20Sequence_003_0000.png" alt="Slot Machine Preview" width="400"/>
+<img src="Recordings/Image%20Sequence_002_0000.png" alt="Slot Machine Preview" width="400"/>
+<img src="Recordings/Image%20Sequence_005_0000.png" alt="Slot Machine Preview" width="400"/>
+<img src="Recordings/Movie_000.gif" alt="Slot Machine Preview" width="400"/>
+//![Image 2](/Recordings/Image%20Sequence_002_0000.png)
+//![Image 3](/Recordings/Image%20Sequence_005_0000.png)
+//![Giff](/Recordings/Movie_000.gif)
