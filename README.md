@@ -3,35 +3,25 @@
 ## Project Explanation
 This is a 5x3 Slot Machine game where clicking the Spin button triggers the reels to spin for a specific duration. Once the spin time ends, each reel stops one by one with a scale bounce effect for visual feedback.
 
-1. Symbol Setup using ScriptableObject
-I started by creating a ScriptableObject for each symbol. This included a unique ID, name, and icon. These fields help identify and display the correct symbol visuals during gameplay.
+1. Symbol Setup using ScriptableObject : I started by creating a ScriptableObject for each symbol. This included a unique ID, name, and icon. These fields help identify and display the correct symbol visuals during gameplay.
 
-2. Prefab Creation for Symbols
-Before setting up the reels, I made a prefab that includes the symbol icon, a highlight effect, and a label (text). This prefab forms the base for every symbol in the reel.
+2. Prefab Creation for Symbols : Before setting up the reels, I made a prefab that includes the symbol icon, a highlight effect, and a label (text). This prefab forms the base for every symbol in the reel.
 
-3. Symbol Script & Visual Handling
-I created a Symbol script and attached it to the prefab. This script uses the ScriptableObject to fetch and apply the correct visuals. It also keeps track of the symbol’s currentPos and nextPos for animation purposes.
+3. Symbol Script & Visual Handling : I created a Symbol script and attached it to the prefab. This script uses the ScriptableObject to fetch and apply the correct visuals. It also keeps track of the symbol’s currentPos and nextPos for animation purposes.
 
-4. Reel Movement – ReelManager
-I built a ReelManager class to control the spinning logic. It handles symbol movement by looping through each one and shifting its position from currentPos to nextPos. Once a symbol goes off-screen, it's reused and sent back to the top, creating a seamless spinning effect.
+4. Reel Movement – ReelManager : I built a ReelManager class to control the spinning logic. It handles symbol movement by looping through each one and shifting its position from currentPos to nextPos. Once a symbol goes off-screen, it's reused and sent back to the top, creating a seamless spinning effect.
 
-5. Symbol Refresh & Position Logic
-The ReelManager also includes methods to refresh symbols on each spin, calculate the next position in the sequence, and handle other reel-specific tasks.
+5. Symbol Refresh & Position Logic : The ReelManager also includes methods to refresh symbols on each spin, calculate the next position in the sequence, and handle other reel-specific tasks.
 
-6. Spin Animation & Speed Tweaks
-To create a more dynamic spinning effect, I used LeanTween to control movement speed. A small "jump" or acceleration is added at the start to make the spin feel more responsive.
+6. Spin Animation & Speed Tweaks : To create a more dynamic spinning effect, I used LeanTween to control movement speed. A small "jump" or acceleration is added at the start to make the spin feel more responsive.
 
-7. Timed Spin Stop
-Using LeanTween’s delayed call, I managed to stop each reel after a specific duration. This ensures consistent timing for reel stop animations.
+7. Timed Spin Stop : Using LeanTween’s delayed call, I managed to stop each reel after a specific duration. This ensures consistent timing for reel stop animations.
 
-8. SlotMachineManager – Reel Control
-Another script, SlotMachineManager, is responsible for starting the spin and coordinating the stopping sequence. Each reel stops with a slight delay from the previous one—for example, the first reel stops at 3s, the second at 3.3s, the third at 3.6s, and so on.
+8. SlotMachineManager – Reel Control : Another script, SlotMachineManager, is responsible for starting the spin and coordinating the stopping sequence. Each reel stops with a slight delay from the previous one—for example, the first reel stops at 3s, the second at 3.3s, the third at 3.6s, and so on.
 
-9. Symbol Match Check
-I implemented basic matching logic to check if adjacent symbols on the same row match based on their ScriptableObject. This is currently handled using a nested for-loop.
+9. Symbol Match Check : I implemented basic matching logic to check if adjacent symbols on the same row match based on their ScriptableObject. This is currently handled using a nested for-loop.
 
-10. Audio Integration
-For added feedback, I included audio effects that play during the spin and when reels stop.
+10. Audio Integration : For added feedback, I included audio effects that play during the spin and when reels stop.
 
 ## Instruction to Run
 ### Play Build 
