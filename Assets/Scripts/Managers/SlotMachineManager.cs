@@ -15,10 +15,7 @@ public class SlotMachineManager : MonoBehaviour
     public Button spinButton;
     public Vector2 spinDurationRange;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
+
 
     // Spin all the reels in the slot machine
     public void Spin()
